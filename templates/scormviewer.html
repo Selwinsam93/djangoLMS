@@ -1,0 +1,33 @@
+{% load i18n %}
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <title>SCORM PLAYER</title>
+    <!-- Rev 1.0 - Sunday, May 31, 2009 -->
+  <!-- <script type="text/javascript" src="{% static 'js/api.js' %}"></script> -->
+
+
+</head>
+
+{% for course in scormcourse %}
+
+
+<frameset  frameborder="0" framespacing="0"  border="0" rows="0,*" cols="*" >
+    <frame src="" name="API" noresize>
+    <frame src="{{ MEDIA_ROOT }}/media/extracted_zips/ScormContent/{{course.courseid}}{{course.launchurl}}" name="course">
+</frameset>
+{% endfor %}
+
+
+
+
+<!-- Scorm Api Adapter-->
+<script type="text/javascript" src="{% static 'js/scormjs/init.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/scormjs/constants.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/scormjs/baseAPI.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/scormjs/jsonFormatter.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/scormjs/scormAPI.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/scormjs/scormAPI2004.js'%}"></script>
+</html>

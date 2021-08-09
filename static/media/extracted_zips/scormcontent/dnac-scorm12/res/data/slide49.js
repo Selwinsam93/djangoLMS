@@ -1,0 +1,5 @@
+(function(){var loadHandler=window['sl_{ADA6B015-EAEB-484E-B768-6D593B49DFC4}'];loadHandler&&loadHandler(48, '<div id="spr0_f3ce5873"><div id="spr1_f3ce5873" class="kern slide"><img id="img3_f3ce5873" src="data/img1.png" width="960px" height="540px" alt="" style="left:0px;top:0px;"/></div><div id="spr2_f3ce5873" class="kern slide"><div id="spr3_f3ce5873" style="left:322px;top:61px;"><img id="img0_f3ce5873" src="data/img249.png" width="321" height="49" alt="Management"/></div><div id="spr4_f3ce5873" style="left:82.286px;top:143.75px;"><img id="img1_f3ce5873" src="data/img250.png" width="156" height="156" alt="" style="left:-0.024px;top:-0.024px;"/></div><div id="spr5_f3ce5873" style="left:287px;top:202px;"><img id="img2_f3ce5873" src="data/img251.png" width="589" height="218" alt="\
+Granular views network wide, from a single dashboard\
+Device lifecycle management\
+Multidomain integration\
+Open and extensible"/></div></div></div>', '{"s":[]}');})();

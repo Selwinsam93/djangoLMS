@@ -1,0 +1,5 @@
+(function(){var loadHandler=window['sl_{ADA6B015-EAEB-484E-B768-6D593B49DFC4}'];loadHandler&&loadHandler(51, '<div id="spr0_f3ce5d84"><div id="spr1_f3ce5d84" class="kern slide"><img id="img3_f3ce5d84" src="data/img1.png" width="960px" height="540px" alt="" style="left:0px;top:0px;"/></div><div id="spr2_f3ce5d84" class="kern slide"><div id="spr3_f3ce5d84" style="left:380px;top:61px;"><img id="img0_f3ce5d84" src="data/img258.png" width="204" height="49" alt="Security"/></div><div id="spr4_f3ce5d84" style="left:82.286px;top:142.884px;"><img id="img1_f3ce5d84" src="data/img259.jpg" width="156" height="158" alt="" style="left:-0.024px;top:-0.158px;"/></div><div id="spr5_f3ce5d84" style="left:287px;top:202px;"><img id="img2_f3ce5d84" src="data/img260.png" width="531" height="180" alt="\
+Threat detection and response\
+Stealthwatch and ISE integration\
+Encrypted Traffic Analytics (ETA)\
+Highly secure segmentation"/></div></div></div>', '{"s":[]}');})();

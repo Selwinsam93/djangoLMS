@@ -1,0 +1,28 @@
+{% load i18n %}
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <title>SCORM PLAYER</title>
+    <!-- Rev 1.0 - Sunday, May 31, 2009 -->
+  <script type="text/javascript" src="{% static 'js/api.js' %}"></script>
+
+
+</head>
+
+
+
+
+<frameset  frameborder="0" framespacing="0"  border="0" rows="*,*,*" cols="*" >
+  <frame src="{%url 'headerf' courseid=courseid.courseid %}">
+  <frameset frameborder="0" framespacing="0"  border="0" rows="0,*" cols="*">
+    <frame src="{% url 'test1' %}" name="API" noresize>
+    {% for course in scormcourse %}
+    <frame src="{{ MEDIA_ROOT }}/media/extracted_zips/ScormContent/{{course.courseid}}{{course.launchurl}}" name="course">
+    {% endfor %}
+  </frameset>
+  <frame src="{% url 'footerf'%}">
+</frameset>
+
+</html>

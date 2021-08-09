@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="icon" href="{% static 'img/fav.png' %}" type="image/gif" sizes="16x16">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registration</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}" />
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/magnific-popup.css'%}" />
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+
+<style>
+
+hr{
+	margin-top: 0px;
+}
+</style>
+</head>
+<body>
+	<!-- Header -->
+	<header>
+		<!-- Nav -->
+		<nav id="nav" class="navbar">
+			<div class="container">
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a href="{% url 'Home' %}" >
+							<img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
+						</a>
+					</div>
+					<!-- /Logo -->
+					<!-- Collapse nav button -->
+					<div class="nav-collapse">
+						<span></span>
+					</div>
+					<!-- /Collapse nav button -->
+				</div>
+				<!--  Main navigation  -->
+
+		</nav>
+		<!-- /Nav -->
+		<!-- header wapper -->
+<hr>
+	</header>
+	<hr style="background:#EEE; margin-bottom:0px; margin-top:0px">
+	<!-- /Header -->
+	<!-- Blog -->
+	<div style="height: 330px;color:red;font-size:15px">
+<b><center>  <p> Thank you for your email confirmation. Now you can login your account </p> </center>
+<center> Click <a href="{% url 'login' %}">	here</a> to login </center></b>
+
+</div>
+		<!-- /Container -->
+	<!-- /Blog -->
+	<!-- Footer -->
+{% include "footer.html" %}
+	<!-- /Footer -->
+	<!-- Back to top -->
+	<div id="back-to-top"></div>
+	<!-- /Back to top -->
+	<!-- Preloader -->
+
+	<!-- /Preloader -->
+	<!-- jQuery Plugins -->
+	<script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

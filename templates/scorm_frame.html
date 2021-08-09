@@ -1,0 +1,472 @@
+
+{% load static %}
+
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="icon" href="{% static 'img/fav.png' %}" type="image/gif" sizes="16x16">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Trainocate Courses</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}" />
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+	<script src="{% static 'js/Lib/sscompat.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/Lib/sscorlib.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/Lib/ssfx.Core.js' %}" type="text/javascript"></script>
+
+	<script type="text/javascript" src="{% static 'js/Lib/API_BASE.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/Lib/API.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/Lib/API_1484_11.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/Lib/Controls.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/Lib/Player.js' %}"></script>
+
+	<style type="text/css">
+		* { margin: 0px; }
+        html, body, iframe { height:100%; }
+		html, body { /*overflow-y:hidden;*/ font-family:Helvetica, "Helvetica Neue", Arial; font-size:12px; color:#000000;}
+		iframe { display:block; width:100%; }
+
+		html, body, iframe , a, img, table, tbody, tr, td, table td, table th {
+		    border : 0px none;
+            padding: 0px;
+		}
+
+
+
+		a:link { color: #0000FF; }
+		a:visited { color: #0000FF; }
+		a:hover { color: #000080; }
+		a:active { color: #0000FF; }
+
+		#btnExit {margin-left:5px;}
+		#btnAbandon {margin-left:5px;}
+		#btnSuspendAll {margin-left:5px;}
+
+		#placeholder_navigationContainer:after {
+			background-color: white;
+		}
+hr{
+	margin: 0px;
+}
+
+	</style>
+
+	<!--[if IE]>
+	<style type="text/css">
+	    html, body { overflow-y:hidden; }
+	</style>
+    <![endif]-->
+
+
+	<script type="text/javascript">
+       function InitPlayer() {
+			//PlayerConfiguration.Debug = true;
+
+           PlayerConfiguration.TreeMinusIcon = "{% static 'img/minus.gif' %}";
+           PlayerConfiguration.TreePlusIcon = "{% static 'img/plus.gif' %}";
+           PlayerConfiguration.TreeLeafIcon = "{% static 'img/leaf.gif' %}";
+           PlayerConfiguration.TreeActiveIcon = "{% static 'img/select.gif' %}";
+
+					 // PlayerConfiguration.BtnPreviousLabel = "Previous";
+           // PlayerConfiguration.BtnContinueLabel = "Continue";
+           // PlayerConfiguration.BtnExitLabel = "Exit";
+           // PlayerConfiguration.BtnExitAllLabel = "Exit All";
+           // PlayerConfiguration.BtnAbandonLabel = "Abandon";
+           // PlayerConfiguration.BtnAbandonAllLabel = "Abandon All";
+           // PlayerConfiguration.BtnSuspendAllLabel = "Suspend All";
+
+
+            PlayerRun();
+
+       }
+
+       function PlayerRun(){
+        var contentDiv = document.getElementById('placeholder_contentIFrame');
+        contentDiv.innerHTML="";
+				{% for course in scormcourse %}
+        Run.ManifestByURL('{{ request.scheme }}://{{ request.META.HTTP_HOST }}/media/extracted_zips/scormcontent/{{course.slug}}/imsmanifest.xml', true);
+{%endfor%}
+			 }
+    </script>
+
+</head>
+<body onload="InitPlayer()" style="background-color:#FFFFFF;">
+	<header>
+		<!-- Nav -->
+		<nav id="nav" class="navbar">
+			<div class="container">
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a href="{% url 'Home' %}">
+							<img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
+						</a>
+
+					</div>
+					<!-- /Logo -->
+					<!-- Collapse nav button -->
+					<div class="nav-collapse">
+						<span></span>
+					</div>
+					<!-- /Collapse nav button -->
+				</div>
+				<!--  Main navigation  -->
+
+				<ul class="main-nav nav navbar-nav navbar-right">
+					{% if user.is_authenticated %}
+					{% else %}
+					<li><a href="{% url 'register' %}">Register</a>
+					<li><a href="{% url 'login' %}">Login</a>
+					{% endif %}
+					<li><a href="{% url 'coursehome' courseid=courseid %}" >Go Back</a></li>
+					<li><a href="{% url 'progress' courseid=courseid %}" >Progress</a></li>
+					{% if request.user.is_staff and request.user.is_superuser %}
+
+					<li>	<a href="{% url 'msg_list'%}">Messages</a></li>
+					{% endif %}
+					<!-- <li><a id="placeholder_navigationContainer"></a></li> -->
+					<li><a href="{% url 'blog' %}">Explore Courses</a></li>
+
+						<ul class="main-nav nav navbar-nav navbar-right">
+							<li class="has-dropdown"><a><i class="fa fa-user-circle-o"></i></a>
+								<ul class="dropdown">
+									<li><a href="{% url 'profile'%}">{{user.username}}</a></li>
+									{% if user.is_authenticated %}
+
+									<li><a href="{% url 'logout' %}">Logout</a>
+									</li>
+									{% else %}
+									<li><a href="{% url 'login' %}">Login</a></li>
+									{% endif %}
+								</ul>
+						</ul>
+						</ul>
+				<!-- /Main navigation -->
+				</div>
+				<hr>
+			</nav>
+
+	<!-- /Nav -->
+	</header>
+
+	<!-- /Header -->
+
+  <table width="100%" height="100%" border="1" cellspacing="0" cellpadding="0">
+    <!-- <tr>
+      <td valign="top">
+        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+         <tr>
+            <td width="200" valign="top"><img src="{% static 'img/logo.png' %}" style="padding-left:5px;padding-right:10px" width="300px" height="auto" border="0" alt="SCORMPOOL"/></td>
+  	        <td valign="bottom"><div id="placeholder_navigationContainer" ></div></td>
+         </tr>
+        </table>
+      </td>
+    </tr> -->
+    <tr>
+      <td height="100%" valign="top">
+       <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td valign="top" height="100%" style="padding-left:5px;"><div id="placeholder_treeContainer" style="width:200px;height:100%;overflow:auto;"></div></td>
+          <td width="100%" height="100%" valign="top"><div id="placeholder_contentIFrame" style="width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;"></div></td>
+          <td valign="top" height="100%">
+            <div id="right_Border" style="width:5px;height:100%;"></div>
+          </td>
+        </tr>
+       </table>
+      </td>
+    </tr>
+
+  </table>
+
+	<form id="scorm_data" >{% csrf_token %}
+
+		<input type="hidden"  name="student_name" id="student_name">
+		<input type="hidden"  name="student_id" id="student_id">
+		<input type="hidden"  name="lesson_location" id="lesson_location">
+		<input type="hidden"  name="max_score" id="max_score">
+		<input type="hidden"  name="min_score" id="min_score">
+		<input type="hidden"  name="raw_score" id="raw_score">
+		<input type="hidden"  name="lesson_mode" id="lesson_mode">
+		<input type="hidden"  name="lesson_status" id="lesson_status">
+		<input type="hidden"  name="entry" id="entry">
+		<input type="hidden"  name="credit" id="credit">
+		<input type="hidden"  name="session_time" id="session_time">
+		<input type="hidden"  name="total_time" id="total_time">
+		<input type="hidden"  name="exit" id="exit">
+
+		<input type="hidden"  name="suspend_data" id="suspend_data">
+
+		<input type="hidden"  name="success_status" id="success_status">
+		<input type="hidden"  name="scaled_passing_score" id="scaled_passing_score">
+		<input type="hidden"  name="progress_measure" id="progress_measure">
+		{%for enroll in student_data%}
+		<input type="hidden" id="enroll_id" value="	{{enroll.id}}">
+    {%endfor%}
+		<input type="submit" id="update" style="display: none">
+	</form>
+
+{% include "footer.html" %}
+
+			<!-- Scorm Api Adapter-->
+			<script type="text/javascript" src="{% static 'js/scormjs/init.js'%}"></script>
+			<script type="text/javascript" src="{% static 'js/scormjs/constants.js'%}"></script>
+			<script type="text/javascript" src="{% static 'js/scormjs/baseAPI.js'%}"></script>
+			<script type="text/javascript" src="{% static 'js/scormjs/jsonFormatter.js'%}"></script>
+
+
+
+			<script type="text/javascript" src="{% static 'js/scormjs/scormAPI.js'%}"></script>
+
+			<script type="text/javascript" src="{% static 'js/scormjs/scormAPI2004.js'%}"></script>
+
+<script>
+
+{% if scorm.scorm_type == "SCORM 1.2"%}
+	{%for enroll in student_data%}
+			{% if enroll.suspend_data %}
+						window.API.cmi.suspend_data= '{{enroll.suspend_data}}';
+			{%endif%}
+
+			{% if enroll.student_id %}
+						window.API.cmi.core.student_id= "{{enroll.student_id}}";
+			{%endif%}
+
+			{% if enroll.student_name %}
+						window.API.cmi.core.student_name= "{{enroll.student_name}}";
+			{%endif%}
+
+			{% if enroll.lesson_location %}
+						window.API.cmi.core.lesson_location= "{{enroll.lesson_location}}";
+			{%endif%}
+
+			{% if enroll.credit %}
+						window.API.cmi.core.credit= "{{enroll.credit}}";
+			{%endif%}
+
+			{% if enroll.lesson_status %}
+						window.API.cmi.core.lesson_status= "{{enroll.lesson_status}}";
+			{%endif%}
+
+			{% if enroll.entry %}
+						window.API.cmi.core.entry= "{{enroll.entry}}";
+			{%endif%}
+
+			{% if enroll.total_time %}
+						window.API.cmi.core.total_time= "{{enroll.total_time}}";
+			{%endif%}
+
+			{% if enroll.lesson_mode %}
+						window.API.cmi.core.lesson_mode= "{{enroll.lesson_mode}}";
+			{%endif%}
+
+			{% if enroll.exit %}
+						window.API.cmi.core.exit= "{{enroll.exit}}";
+			{%endif%}
+
+			{% if enroll.session_time %}
+						window.API.cmi.core.session_time= "{{enroll.session_time}}";
+			{%endif%}
+
+			{% if enroll.raw_score %}
+						window.API.cmi.core.score.raw= "{{enroll.raw_score}}";
+			{%endif%}
+
+			{% if enroll.min_score %}
+						window.API.cmi.core.score.min= "{{enroll.min_score}}";
+			{%endif%}
+
+			{% if enroll.max_score %}
+						window.API.cmi.core.score.max= "{{enroll.max_score}}";
+			{%endif%}
+	{%endfor%}
+
+{%elif scorm.scorm_type == "SCORM 2004"%}
+
+{%for enroll in student_data%}
+		{% if enroll.suspend_data %}
+					window.API_1484_11.cmi.suspend_data= "{{enroll.suspend_data}}";
+		{%endif%}
+
+		{% if enroll.student_id %}
+					window.API_1484_11.cmi.learner_id= "{{enroll.student_id}}";
+		{%endif%}
+
+		{% if enroll.student_name %}
+					window.API_1484_11.cmi.learner_name= "{{enroll.student_name}}";
+		{%endif%}
+
+		{% if enroll.lesson_location %}
+					window.API_1484_11.cmi.location= "{{enroll.lesson_location}}";
+		{%endif%}
+
+		{% if enroll.credit %}
+					window.API_1484_11.cmi.credit= "{{enroll.credit}}";
+		{%endif%}
+
+		{% if enroll.lesson_status %}
+					window.API_1484_11.cmi.completion_status= "{{enroll.lesson_status}}";
+		{%endif%}
+
+		{% if enroll.entry %}
+					window.API_1484_11.cmi.entry= "{{enroll.entry}}";
+		{%endif%}
+
+		{% if enroll.total_time %}
+					window.API_1484_11.cmi.total_time= "{{enroll.total_time}}";
+		{%endif%}
+
+		{% if enroll.lesson_mode %}
+					window.API_1484_11.cmi.mode= "{{enroll.lesson_mode}}";
+		{%endif%}
+
+		{% if enroll.exit %}
+					window.API_1484_11.cmi.exit= "{{enroll.exit}}";
+		{%endif%}
+
+		{% if enroll.session_time %}
+					window.API_1484_11.cmi.session_time= "{{enroll.session_time}}";
+		{%endif%}
+
+		{% if enroll.raw_score %}
+					window.API_1484_11.cmi.score.raw= "{{enroll.raw_score}}";
+		{%endif%}
+
+		{% if enroll.min_score %}
+					window.API_1484_11.cmi.score.min= "{{enroll.min_score}}";
+		{%endif%}
+
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.score.max= "{{enroll.max_score}}";
+		{%endif%}
+
+
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.success_status= "{{enroll.success_status}}";
+		{%endif%}
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.scaled_passing_score= "{{enroll.scaled_passing_score}}";
+		{%endif%}
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.progress_measure= "{{enroll.progress_measure}}";
+		{%endif%}
+
+  {%endfor%}
+{%endif%}
+
+
+
+setInterval(function(){
+
+	{% if scorm.scorm_type == "SCORM 1.2"%}
+	var simplifiedObject = window.API.cmi.toJSON();
+console.log(simplifiedObject);
+	document.getElementById("student_id").value = simplifiedObject.core.student_id;
+	document.getElementById("student_name").value = simplifiedObject.core.student_name;
+	document.getElementById("lesson_location").value = simplifiedObject.core.lesson_location;
+	document.getElementById("credit").value = simplifiedObject.core.credit;
+	document.getElementById("lesson_status").value = simplifiedObject.core.lesson_status;
+	document.getElementById("entry").value = simplifiedObject.core.entry;
+	document.getElementById("total_time").value = simplifiedObject.core.total_time;
+	document.getElementById("lesson_mode").value = simplifiedObject.core.lesson_mode;
+	document.getElementById("exit").value = simplifiedObject.core.exit;
+	document.getElementById("session_time").value = simplifiedObject.core.session_time;
+	document.getElementById("raw_score").value = simplifiedObject.core.score.raw;
+	document.getElementById("min_score").value = simplifiedObject.core.score.min;
+	document.getElementById("max_score").value = simplifiedObject.core.score.max;
+	document.getElementById("suspend_data").value = simplifiedObject.suspend_data;
+
+	{%elif scorm.scorm_type == "SCORM 2004"%}
+
+	var simplifiedObject = window.API_1484_11.cmi.toJSON();
+console.log(simplifiedObject);
+	document.getElementById("student_id").value = simplifiedObject.learner_id;
+	document.getElementById("student_name").value = simplifiedObject.learner_name;
+	document.getElementById("lesson_location").value = simplifiedObject.location;
+	document.getElementById("credit").value = simplifiedObject.credit;
+	document.getElementById("lesson_status").value = simplifiedObject.completion_status;
+	document.getElementById("entry").value = simplifiedObject.entry;
+	document.getElementById("total_time").value = simplifiedObject.total_time;
+	document.getElementById("lesson_mode").value = simplifiedObject.lesson_mode;
+	document.getElementById("exit").value = simplifiedObject.exit;
+	document.getElementById("session_time").value = simplifiedObject.session_time;
+	document.getElementById("raw_score").value = simplifiedObject.score.raw;
+	document.getElementById("min_score").value = simplifiedObject.score.min;
+	document.getElementById("max_score").value = simplifiedObject.score.max;
+	document.getElementById("suspend_data").value = simplifiedObject.suspend_data;
+	document.getElementById("success_status").value = simplifiedObject.success_status;
+	document.getElementById("scaled_passing_score").value = simplifiedObject.scaled_passing_score;
+	document.getElementById("progress_measure").value = simplifiedObject.progress_measure;
+	{%endif%}
+
+document.getElementById("update").click();
+
+	}, 3000);
+
+</script>
+
+	<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+	<script>
+
+	$(document).on('submit','#scorm_data',function(e){
+			e.preventDefault();
+			$.ajax({
+				type:'POST',
+				url:'/store_data/',
+				data:{
+					student_name:$('#student_name').val(),
+					student_id:$('#student_id').val(),
+					lesson_location:$('#lesson_location').val(),
+					max_score:$('#max_score').val(),
+					min_score:$('#min_score').val(),
+					raw_score:$('#raw_score').val(),
+					lesson_mode:$('#lesson_mode').val(),
+					lesson_status:$('#lesson_status').val(),
+					entry:$('#entry').val(),
+					credit:$('#credit').val(),
+					session_time:$('#session_time').val(),
+					total_time:$('#total_time').val(),
+					exit:$('#exit').val(),
+					suspend_data:$('#suspend_data').val(),
+					success_status:$('#success_status').val(),
+					scaled_passing_score:$('#scaled_passing_score').val(),
+					progress_measure:$('#progress_measure').val(),
+					enroll_id:$('#enroll_id').val(),
+					csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+				},
+				success:function() {
+
+				}
+			})
+	});
+
+// setInterval(function(){
+// document.getElementById("update").click();
+// }, 4000);
+	// window.addEventListener("click", function(event) {
+	//
+	//
+	// });
+
+
+	</script>
+
+
+</body>
+</html>

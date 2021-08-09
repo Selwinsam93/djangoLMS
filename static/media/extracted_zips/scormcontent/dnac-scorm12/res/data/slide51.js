@@ -1,0 +1,5 @@
+(function(){var loadHandler=window['sl_{ADA6B015-EAEB-484E-B768-6D593B49DFC4}'];loadHandler&&loadHandler(50, '<div id="spr0_f3ce5bcf"><div id="spr1_f3ce5bcf" class="kern slide"><img id="img3_f3ce5bcf" src="data/img1.png" width="960px" height="540px" alt="" style="left:0px;top:0px;"/></div><div id="spr2_f3ce5bcf" class="kern slide"><div id="spr3_f3ce5bcf" style="left:237px;top:60px;"><img id="img0_f3ce5bcf" src="data/img255.png" width="486" height="50" alt="AI and ML Analytics"/></div><div id="spr4_f3ce5bcf" style="left:81.438px;top:155.178px;"><img id="img1_f3ce5bcf" src="data/img256.jpg" width="157" height="155" alt="" style="left:-0.101px;top:0.056px;"/></div><div id="spr5_f3ce5bcf" style="left:287px;top:202px;"><img id="img2_f3ce5bcf" src="data/img257.png" width="548" height="179" alt="\
+Everything as a sensor\
+Context-guided analytics \
+More than 150 actionable insights\
+Local and cloud-based AI analytics"/></div></div></div>', '{"s":[]}');})();

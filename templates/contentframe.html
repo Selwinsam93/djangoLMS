@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row well">
+    <div class="col-md-3" style="height:100%;">
+      {% for tit in coursetit %}
+      <ul class=" list-group">
+        <li class="list-group-item"><a href="?page={{ forloop.counter }}">{{tit.sub_title}}</a></li>
+        {% endfor %}
+        <li class="list-group-item">	<a href="{% url 'exam' courseid=courseid.courseid %}">Exam</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-9" style="padding-left:30px; border-left: 3px solid #ccc;">
+
+
+
+  <div class="row">
+
+    <div class="btn-block pull-right">
+  <!-- {% if coursecontent.has_previous %}
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="?page=1">&laquo;&laquo;&laquo;</a> -->
+        <a class="btn btn-primary pull-left" href="?page={{ coursecontent.previous_page_number }}">&laquo;Previous</a>
+ <!-- {% endif %} -->
+
+
+             <!-- <span class="current">
+                 Page {{ coursecontent.number }} of {{ coursecontent.paginator.num_pages }}.
+             </span> -->
+
+
+              <!-- {% if coursecontent.has_next %} -->
+              <a class="btn btn-primary pull-right" href="?page={{ coursecontent.next_page_number }}">Next&raquo; </a>
+              <!-- <a href="?page={{ coursecontent.paginator.num_pages }}">&raquo;&raquo;&raquo;</a>
+             {% endif %} -->
+          </div>
+
+
+
+
+
+    <br>
+    <br>
+    {% for tit in coursecontent %}
+    <center>
+      <video width="550" controls>
+        <source src="{{tit.video.url}}" type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML5 video.
+      </video>
+    </center>
+    <p style="text-align:justify;margin-right: 20px;"><br><br><t>{{tit.explain}}<br><br></p>
+      {% endfor %}
+
+
+
+
+
+  </div>
+
+  </div>
+
+
+</div>
+<div>

@@ -1,0 +1,2 @@
+(function(){var loadHandler=window['sl_{ADA6B015-EAEB-484E-B768-6D593B49DFC4}'];loadHandler&&loadHandler(169, '<div id="spr0_f3cf873f"><div id="spr1_f3cf873f" class="kern slide"><img id="img1_f3cf873f" src="data/img1.png" width="960px" height="540px" alt="" style="left:0px;top:0px;"/></div><div id="spr2_f3cf873f" class="kern slide"><div id="spr3_f3cf873f" style="left:153px;top:225px;"><img id="img0_f3cf873f" src="data/img685.png" width="655" height="99" alt="Assurance:\
+What you need to get started"/></div></div></div>', '{"s":[]}');})();

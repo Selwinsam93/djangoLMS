@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="icon" href="{% static 'img/fav.png' %}" type="image/gif" sizes="16x16">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Trainocate Courses</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}" />
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+	<style>
+
+	.active, li:hover {
+		background: transparent;
+		color: #6195FF;
+	}
+	.nav>li>a:after {
+			content: "";
+			display: block;
+			/* background-color: #6195FF; */
+			height: 2px;
+			width: 0%;
+			-webkit-transition: 0.2s width;
+			transition: 0.2s width;
+	}
+	li>a:hover:after, li.active>a:after {
+			width: 100%;
+	}
+	</style>
+
+{% include "livechat.html" %}
+</head>
+<body>
+	<div id="header"></div>
+
+ 	{% include "header.html" %}
+
+
+	<!-- Blog -->
+	<div id="blog" class="section cm-padding" >
+		<nav id="nav" class="nav-transparent well">
+
+			<div class="container">
+
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle btn btn-sm" data-toggle="collapse" data-target="#myNavbar" style="width:50px">
+
+					<img src="{% static 'img/col.png' %}" height="30" width="30">
+					</button>
+				</div>
+				<div id="myNavbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-left">
+<li><a href="{% url 'courseabout' courseid=courseid %}" style="color: #ff5733">Home</a></li>
+						{% for home in cohome %}
+						<li class="active"><a href="{% url 'coursehome' courseid=home.courseid %}" style="color: #ff5733">Course Info</a></li>
+						{% endfor %}
+						{% if user.is_authenticated %}
+						{% for home in cohome %}
+
+
+
+						{% endfor %}
+						{% endif %}
+						<li ><a href="{% url 'progress' courseid=courseid %}" style="color: #ff5733">Progress</a></li>
+
+						{% for home in cohome %}
+						<li><a href="{% url 'requirements' courseid=home.courseid %}" style="color: #ff5733">Basic Requirements</a></li>
+						<li><a href="{% url 'schedules' courseid=home.courseid %}" style="color: #ff5733">Schedules</a></li>
+
+						{% endfor %}
+						{% if user.is_authenticated %}
+						<li><a href="{% url 'chat' courseid=courseid %}" style="color: #ff5733">Discussion</a></li>
+						{% endif %}
+
+					</ul>
+				</div>
+					<!-- /Main navigation -->
+			</div>
+		</nav>
+	</div>
+<!--blog-->
+
+
+	<div class="container well">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					{% for home in cohome %}
+
+          <h3 class="page-title">{{ home.name }}</h3>
+          <div  class="page-subtitle">{{ home.courseid }}
+					</div>
+        </div>
+{{instance.courseid}}
+				<div class="col-md-6" style="margin-top:13px">
+					{% if user.is_authenticated %}
+
+					<a class="btn btn-primary pull-right" href="#" onclick="popuponclick();" > Take Course</a>
+					{% else %}
+					<a class="btn btn-primary pull-right" href="{% url 'login' %}" >Resume Course</a>
+					{% endif %}
+				</div>
+					{%endfor%}
+			</div>
+
+			<hr style="height:5px;background-color: #595e66;">
+
+			<div class="row ">
+				<div class="col-md-8">
+
+
+				<h4>Course Updates and News </h4>
+     Go from Beginner to Expert in your favourite domain by building projects. The best investment for your work journey! <br> <br> This course can take you from newbie to pro in a day with provoking contents, brain teasing exercises and showcasing usecases.
+
+				</div>
+				<div class="col-md-4">
+					<div class="pull-right">
+						<h5>Important Course Dates</h5>
+							<blockquote>
+								<p>
+									{% now "jS F Y H:i" %}
+								</p>
+
+							</blockquote>
+						<h6>Course Handouts</h6>
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+
+	</div>
+	<br><br><br><br><br><br><br><br><br><br>
+
+
+<!--- Scorm data Update -->
+
+
+<form id="scorm_data" >{% csrf_token %}
+
+	<input type="hidden"  name="student_name" id="student_name">
+	<input type="hidden"  name="student_id" id="student_id">
+	<input type="hidden"  name="lesson_location" id="lesson_location">
+	<input type="hidden"  name="max_score" id="max_score">
+	<input type="hidden"  name="min_score" id="min_score">
+	<input type="hidden"  name="raw_score" id="raw_score">
+	<input type="hidden"  name="lesson_mode" id="lesson_mode">
+	<input type="hidden"  name="lesson_status" id="lesson_status">
+	<input type="hidden"  name="entry" id="entry">
+	<input type="hidden"  name="credit" id="credit">
+	<input type="hidden"  name="session_time" id="session_time">
+	<input type="hidden"  name="total_time" id="total_time">
+	<input type="hidden"  name="exit" id="exit">
+
+	<input type="hidden"  name="suspend_data" id="suspend_data">
+
+	<input type="hidden"  name="success_status" id="success_status">
+	<input type="hidden"  name="scaled_passing_score" id="scaled_passing_score">
+	<input type="hidden"  name="progress_measure" id="progress_measure">
+	{%for enroll in student_data%}
+	<input type="hidden" id="enroll_id" value="	{{enroll.id}}">
+	{%endfor%}
+	<input type="submit" id="update" style="display: none">
+</form>
+
+
+<input type="hidden" id="demo" name="demo">
+
+
+
+			<!-- /Row -->
+			{% include "footer.html" %}
+
+
+			<!-- jQuery Plugins -->
+			<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+			<script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+			<!-- Scorm Api Adapter-->
+			<script type="text/javascript" src="{% static 'js/scormjs/init.js'%}"></script>
+			<script type="text/javascript" src="{% static 'js/scormjs/constants.js'%}"></script>
+			<script type="text/javascript" src="{% static 'js/scormjs/baseAPI.js'%}"></script>
+			<script type="text/javascript" src="{% static 'js/scormjs/jsonFormatter.js'%}"></script>
+
+
+		{% if scorm.scorm_type == "SCORM 1.2"%}
+			<script type="text/javascript" src="{% static 'js/scormjs/scormAPI.js'%}"></script>
+    {%endif%}
+		{% if scorm.scorm_type == "SCORM 2004"%}
+		<script type="text/javascript" src="{% static 'js/scormjs/scormAPI2004.js'%}"></script>
+		{%endif%}
+<script type="text/javascript">
+
+
+{% if scorm.scorm_type == "SCORM 1.2"%}
+	{%for enroll in student_data%}
+			{% if enroll.suspend_data %}
+						window.API.cmi.suspend_data= "{{enroll.suspend_data}}";
+			{%endif%}
+
+			{% if enroll.student_id %}
+						window.API.cmi.core.student_id= "{{enroll.student_id}}";
+			{%endif%}
+
+			{% if enroll.student_name %}
+						window.API.cmi.core.student_name= "{{enroll.student_name}}";
+			{%endif%}
+
+			{% if enroll.lesson_location %}
+						window.API.cmi.core.lesson_location= "{{enroll.lesson_location}}";
+			{%endif%}
+
+			{% if enroll.credit %}
+						window.API.cmi.core.credit= "{{enroll.credit}}";
+			{%endif%}
+
+			{% if enroll.lesson_status %}
+						window.API.cmi.core.lesson_status= "{{enroll.lesson_status}}";
+			{%endif%}
+
+			{% if enroll.entry %}
+						window.API.cmi.core.entry= "{{enroll.entry}}";
+			{%endif%}
+
+			{% if enroll.total_time %}
+						window.API.cmi.core.total_time= "{{enroll.total_time}}";
+			{%endif%}
+
+			{% if enroll.lesson_mode %}
+						window.API.cmi.core.lesson_mode= "{{enroll.lesson_mode}}";
+			{%endif%}
+
+			{% if enroll.exit %}
+						window.API.cmi.core.exit= "{{enroll.exit}}";
+			{%endif%}
+
+			{% if enroll.session_time %}
+						window.API.cmi.core.session_time= "{{enroll.session_time}}";
+			{%endif%}
+
+			{% if enroll.raw_score %}
+						window.API.cmi.core.score.raw= "{{enroll.raw_score}}";
+			{%endif%}
+
+			{% if enroll.min_score %}
+						window.API.cmi.core.score.min= "{{enroll.min_score}}";
+			{%endif%}
+
+			{% if enroll.max_score %}
+						window.API.cmi.core.score.max= "{{enroll.max_score}}";
+			{%endif%}
+	{%endfor%}
+{%endif%}
+
+
+{%if scorm.scorm_type == "SCORM 2004"%}
+
+{%for enroll in student_data%}
+		{% if enroll.suspend_data %}
+					window.API_1484_11.cmi.suspend_data= "{{enroll.suspend_data}}";
+		{%endif%}
+
+		{% if enroll.student_id %}
+					window.API_1484_11.cmi.learner_id= "{{enroll.student_id}}";
+		{%endif%}
+
+		{% if enroll.student_name %}
+					window.API_1484_11.cmi.learner_name= "{{enroll.student_name}}";
+		{%endif%}
+
+		{% if enroll.lesson_location %}
+					window.API_1484_11.cmi.location= "{{enroll.lesson_location}}";
+		{%endif%}
+
+		{% if enroll.credit %}
+					window.API_1484_11.cmi.credit= "{{enroll.credit}}";
+		{%endif%}
+
+		{% if enroll.lesson_status %}
+					window.API_1484_11.cmi.completion_status= "{{enroll.lesson_status}}";
+		{%endif%}
+
+		{% if enroll.entry %}
+					window.API_1484_11.cmi.entry= "{{enroll.entry}}";
+		{%endif%}
+
+		{% if enroll.total_time %}
+					window.API_1484_11.cmi.total_time= "{{enroll.total_time}}";
+		{%endif%}
+
+		// {% if enroll.lesson_mode %}
+		// 			window.API_1484_11.cmi.mode= "{{enroll.lesson_mode}}";
+		// {%endif%}
+
+		{% if enroll.exit %}
+					window.API_1484_11.cmi.exit= "{{enroll.exit}}";
+		{%endif%}
+
+		{% if enroll.session_time %}
+					window.API_1484_11.cmi.session_time= "{{enroll.session_time}}";
+		{%endif%}
+
+		{% if enroll.raw_score %}
+					window.API_1484_11.cmi.score.raw= "{{enroll.raw_score}}";
+		{%endif%}
+
+		{% if enroll.min_score %}
+					window.API_1484_11.cmi.score.min= "{{enroll.min_score}}";
+		{%endif%}
+
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.score.max= "{{enroll.max_score}}";
+		{%endif%}
+
+
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.success_status= "{{enroll.success_status}}";
+		{%endif%}
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.scaled_passing_score= "{{enroll.scaled_passing_score}}";
+		{%endif%}
+		{% if enroll.max_score %}
+					window.API_1484_11.cmi.progress_measure= "{{enroll.progress_measure}}";
+		{%endif%}
+
+  {%endfor%}
+{%endif%}
+
+
+//
+// 	{% if scorm.scorm_type == "SCORM 1.2"%}
+// 	setInterval(function(){
+// 	var simplifiedObject = window.API.cmi.toJSON();
+// 	//console.log(simplifiedObject);
+// 	document.getElementById("student_id").value = simplifiedObject.core.student_id;
+// 	document.getElementById("student_name").value = simplifiedObject.core.student_name;
+// 	document.getElementById("lesson_location").value = simplifiedObject.core.lesson_location;
+// 	document.getElementById("credit").value = simplifiedObject.core.credit;
+// 	document.getElementById("lesson_status").value = simplifiedObject.core.lesson_status;
+// 	document.getElementById("entry").value = simplifiedObject.core.entry;
+// 	document.getElementById("total_time").value = simplifiedObject.core.total_time;
+// 	document.getElementById("lesson_mode").value = simplifiedObject.core.lesson_mode;
+// 	document.getElementById("exit").value = simplifiedObject.core.exit;
+// 	document.getElementById("session_time").value = simplifiedObject.core.session_time;
+// 	document.getElementById("raw_score").value = simplifiedObject.core.score.raw;
+// 	document.getElementById("min_score").value = simplifiedObject.core.score.min;
+// 	document.getElementById("max_score").value = simplifiedObject.core.score.max;
+// 	document.getElementById("suspend_data").value = simplifiedObject.suspend_data;
+// 	document.getElementById("update").click();
+//
+// }, 4000);
+// 	{%endif%}
+//
+//
+// 	{% if scorm.scorm_type == "SCORM 2004"%}
+// 	setInterval(function(){
+// 		var simplifiedObject = window.API_1484_11.cmi.toJSON();
+// 		//console.log(simplifiedObject);
+// 		document.getElementById("student_id").value = simplifiedObject.learner_id;
+// 		document.getElementById("student_name").value = simplifiedObject.learner_name;
+// 		document.getElementById("lesson_location").value = simplifiedObject.location;
+// 		document.getElementById("credit").value = simplifiedObject.credit;
+// 		document.getElementById("lesson_status").value = simplifiedObject.completion_status;
+// 		document.getElementById("entry").value = simplifiedObject.entry;
+// 		document.getElementById("total_time").value = simplifiedObject.total_time;
+// 		document.getElementById("lesson_mode").value = "normal";
+// 		document.getElementById("exit").value = simplifiedObject.exit;
+// 		document.getElementById("session_time").value = simplifiedObject.session_time;
+// 		document.getElementById("raw_score").value = simplifiedObject.score.raw;
+// 		document.getElementById("min_score").value = simplifiedObject.score.min;
+// 		document.getElementById("max_score").value = simplifiedObject.score.max;
+// 		document.getElementById("suspend_data").value = simplifiedObject.suspend_data;
+// 		document.getElementById("success_status").value = simplifiedObject.success_status;
+// 		document.getElementById("scaled_passing_score").value = simplifiedObject.scaled_passing_score;
+// 		document.getElementById("progress_measure").value = simplifiedObject.progress_measure;
+// 	document.getElementById("update").click();
+//
+// }, 4000);
+// 	{%endif%}
+
+var xhttp;
+xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+    }
+};
+{% for course in scormcourse %}
+xhttp.open("GET", "{{ MEDIA_ROOT }}/media/extracted_zips/scormcontent/{{course.slug}}/imsmanifest.xml", true);
+{%endfor%}
+xhttp.send();
+
+function myFunction(xml) {
+    var x, i, txt, xmlDoc, txt1,y;
+    xmlDoc = xml.responseXML;
+    txt = "";
+    x = xmlDoc.getElementsByTagName("resource");
+    for (i = 0; i < x.length; i++) {
+        txt = x[0].getAttribute('href');
+
+    }
+    document.getElementById("demo").value = txt;
+}
+
+				var ChildWindow;
+				function  popuponclick() {
+				 var launch=document.getElementById("demo").value;
+
+					{% for course in scormcourse %}
+				ChildWindow = window.open('{{ MEDIA_ROOT }}/media/extracted_zips/scormcontent/{{course.slug}}/'+launch,'name','width=1024,height=700');
+				{%endfor%}
+
+
+
+
+
+				setTimeout(function() { // we need to have the new page active
+					ChildWindow.addEventListener("unload",OnChildWindowClose)
+				},1000)
+				}
+				function OnChildWindowClose() {
+
+					{% if scorm.scorm_type == "SCORM 1.2"%}
+
+					var simplifiedObject = window.API.cmi.toJSON();
+					//console.log(simplifiedObject);
+					document.getElementById("student_id").value = simplifiedObject.core.student_id;
+					document.getElementById("student_name").value = simplifiedObject.core.student_name;
+					document.getElementById("lesson_location").value = simplifiedObject.core.lesson_location;
+					document.getElementById("credit").value = simplifiedObject.core.credit;
+					document.getElementById("lesson_status").value = simplifiedObject.core.lesson_status;
+					document.getElementById("entry").value = simplifiedObject.core.entry;
+					document.getElementById("total_time").value = simplifiedObject.core.total_time;
+					document.getElementById("lesson_mode").value = simplifiedObject.core.lesson_mode;
+					document.getElementById("exit").value = simplifiedObject.core.exit;
+					document.getElementById("session_time").value = simplifiedObject.core.session_time;
+					document.getElementById("raw_score").value = simplifiedObject.core.score.raw;
+					document.getElementById("min_score").value = simplifiedObject.core.score.min;
+					document.getElementById("max_score").value = simplifiedObject.core.score.max;
+					document.getElementById("suspend_data").value = simplifiedObject.suspend_data;
+
+					{%endif%}
+
+
+					{% if scorm.scorm_type == "SCORM 2004"%}
+
+						var simplifiedObject = window.API_1484_11.cmi.toJSON();
+						//console.log(simplifiedObject);
+						document.getElementById("student_id").value = simplifiedObject.learner_id;
+						document.getElementById("student_name").value = simplifiedObject.learner_name;
+						document.getElementById("lesson_location").value = simplifiedObject.location;
+						document.getElementById("credit").value = simplifiedObject.credit;
+						document.getElementById("lesson_status").value = simplifiedObject.completion_status;
+						document.getElementById("entry").value = simplifiedObject.entry;
+						document.getElementById("total_time").value = simplifiedObject.total_time;
+						document.getElementById("lesson_mode").value = "normal";
+						document.getElementById("exit").value = simplifiedObject.exit;
+						document.getElementById("session_time").value = simplifiedObject.session_time;
+						document.getElementById("raw_score").value = simplifiedObject.score.raw;
+						document.getElementById("min_score").value = simplifiedObject.score.min;
+						document.getElementById("max_score").value = simplifiedObject.score.max;
+						document.getElementById("suspend_data").value = simplifiedObject.suspend_data;
+						document.getElementById("success_status").value = simplifiedObject.success_status;
+						document.getElementById("scaled_passing_score").value = simplifiedObject.scaled_passing_score;
+						document.getElementById("progress_measure").value = simplifiedObject.progress_measure;
+
+					{%endif%}
+
+				document.getElementById("update").click();
+				//var jsonO =  window.API_1484_11.cmi.toJSON();
+				//console.log(jsonO);
+				window.location.reload();
+				this.opener.ChildWindow = null;
+				};
+
+			</script>
+
+
+			<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+			<script>
+
+			$(document).on('submit','#scorm_data',function(e){
+					e.preventDefault();
+					$.ajax({
+						type:'POST',
+						url:'/store_data/',
+						data:{
+							student_name:$('#student_name').val(),
+							student_id:$('#student_id').val(),
+							lesson_location:$('#lesson_location').val(),
+							max_score:$('#max_score').val(),
+							min_score:$('#min_score').val(),
+							raw_score:$('#raw_score').val(),
+							lesson_mode:$('#lesson_mode').val(),
+							lesson_status:$('#lesson_status').val(),
+							entry:$('#entry').val(),
+							credit:$('#credit').val(),
+							session_time:$('#session_time').val(),
+							total_time:$('#total_time').val(),
+							exit:$('#exit').val(),
+							suspend_data:$('#suspend_data').val(),
+							success_status:$('#success_status').val(),
+							scaled_passing_score:$('#scaled_passing_score').val(),
+							progress_measure:$('#progress_measure').val(),
+							enroll_id:$('#enroll_id').val(),
+							csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+						},
+						success:function() {
+
+						}
+					})
+			});
+
+		// setInterval(function(){
+		// document.getElementById("update").click();
+		// }, 4000);
+			// window.addEventListener("click", function(event) {
+			//
+			//
+			// });
+
+
+			</script>
+
+
+
+
+
+
+
+	</body>
+
+</html>

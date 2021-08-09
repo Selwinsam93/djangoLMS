@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="icon" href="{% static 'img/fav.png' %}" type="image/gif" sizes="16x16">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Trainocate Courses</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}" />
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+
+{% include "livechat.html" %}
+
+
+</head>
+<body>
+	<!-- Header -->
+	{% include "header.html" %}
+	<!-- /Header -->
+	<!-- header wapper -->
+
+	<div class="row well" style="background-image: url('{% static "img/cdes2.jpg" %}');">
+		<div class="col-sm-6">
+			<h3 style="color: #ff5733; font-size:22px">{{instance.name}} {{instance.courseid}}</h3>
+			<h3 style="color: #ff5733; font-size:22px">{{instance.category}}</h3>
+			<hr>
+
+
+{% if user_id == student_id%}
+
+		 <a href="{% url 'coursehome' courseid=instance.courseid %}" >	<button class="enr" style="color:red"><span style="font-size:18px"> <b>Open Course</b> </button></a>
+
+{%else%}
+
+			<a href="{% url 'checkout' id=instance.id %}" >	<button class="enr" style="color:red"><span style="font-size:18px"><b>Buy Now @ ₹{{instance.original_price}} </span> <strike style="font-size:22px"> ₹{{instance.duplicate_price}}</strike></b> </button></a>
+
+
+{%endif%}
+
+		</div>
+		<div class="col-sm-6 text-right">
+		<img  src="{{instance.image.url}}" class="himgt">
+		</div>
+	</div>
+
+
+
+
+
+	<!-- /header wrapper -->
+
+
+	<!-- /Header -->
+	<!-- Blog -->
+	<div id="blog" class="section">
+		<!-- Container -->
+		<div class="container">
+
+
+				<!-- Main -->
+			<main id="main">
+				<h1 class="text-center" style="color: #ff5733;">{{instance.name}}</h1>
+				<div class="text-justify">
+					<p>{{instance.description }}</p>
+					<p >This is a self-paced course that helps you to understand the fundamentals of {{instance.name}}.</p>
+				</div>
+			</main>
+<!-- Row -->
+		<div class="row">
+				<div class="col-sm-4">
+					<div class="ic">
+						<a href="{% url 'courseabout' courseid=instance.courseid %}"> <i class="fa fa-info-circle" aria-hidden="true" style="color: #ff5733;font-size:108px;"></i></a>
+						<h4>About {{ instance.courseid }}</h4>
+						<p>Get a brief idea about this course to gain interest about the contents</p>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="ic">
+				 		<a href="{% url 'requirements' courseid=instance.courseid %}">	<i class="fa fa-newspaper-o" aria-hidden="true" style="color: #ff5733;font-size:108px;"></i>
+						</a>
+						<h4>Basic Requirements</h4>
+						<p>Get to know the basic requirements to have better understanding about this course</p>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="ic">
+						<a href="{% url 'schedules' courseid=instance.courseid %}">
+						<i class="fa fa-calendar-plus-o" aria-hidden="true" style="color: #ff5733;font-size:108px;"></i>
+					  </a>
+						<h4>Scheduled Dates</h4>
+						<p>This course will be live until the given scheduled dates. Dont miss it!</p>
+					</div>
+				</div>
+		</div>
+			<!-- /Row -->
+		</div>
+		<!-- /Container -->
+	</div>
+	<!-- /Blog -->
+	<!-- Footer -->
+	<br><br><br>
+	{% include "footer.html" %}
+	<!-- /Footer -->
+
+
+		<input class="btn btn-primary" name="scorm12" type="hidden" id="enroll">
+
+	<!-- jQuery Plugins -->
+	<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+<!-- <script>
+
+	function enroll()
+	{
+	document.getElementById("enroll").click();
+	}
+
+{%for enrolled in enrolled_student %}
+{% if user_id in enrolled.student_id %}
+document.getElementById("enroll").style.display = "none";
+{% endif %}
+{%endfor%}
+
+
+</script> -->
+	</body>
+
+</html>

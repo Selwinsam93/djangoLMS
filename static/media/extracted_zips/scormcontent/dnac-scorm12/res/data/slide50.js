@@ -1,0 +1,5 @@
+(function(){var loadHandler=window['sl_{ADA6B015-EAEB-484E-B768-6D593B49DFC4}'];loadHandler&&loadHandler(49, '<div id="spr0_f3ce5a19"><div id="spr1_f3ce5a19" class="kern slide"><img id="img3_f3ce5a19" src="data/img1.png" width="960px" height="540px" alt="" style="left:0px;top:0px;"/></div><div id="spr2_f3ce5a19" class="kern slide"><div id="spr3_f3ce5a19" style="left:334px;top:61px;"><img id="img0_f3ce5a19" src="data/img252.png" width="293" height="38" alt="Automation"/></div><div id="spr4_f3ce5a19" style="left:82.286px;top:137.903px;"><img id="img1_f3ce5a19" src="data/img253.jpg" width="160" height="162" alt="" style="left:-0px;top:-0.101px;"/></div><div id="spr5_f3ce5a19" style="left:287px;top:202px;"><img id="img2_f3ce5a19" src="data/img254.png" width="553" height="218" alt="\
+Automated device discovery \
+Drag-and-drop policy creation\
+Zero-touch device deployment and lifecycle management\
+Automated Quality of Service"/></div></div></div>', '{"s":[]}');})();
